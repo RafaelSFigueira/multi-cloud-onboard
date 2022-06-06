@@ -1,0 +1,147 @@
+{% extends 'clientes/navbar.html' %}
+{% block content %}
+{% load static %}
+<link href="{% static 'css/Forms-Reserva.css' %}" rel="stylesheet">
+{%block load%}
+{%endblock load%}
+<center>
+	<div id="register">
+		<div class="container ">
+			<div id="wrap">
+				<div id="content">
+			<div id="register-row" class="row justify-content-left align-items-left" style="border: 5px solid" >
+				<form method='post' class="form" role="form" action="" style="text-align:center;">
+					{% csrf_token %}
+	            	<h3>Criar Pedido da:</h3>
+					<h4>Reserva de Take Away:</h4>
+					<h5 style="color :red;"> {{mensagem}}</h5>
+					<br>
+				<p>
+				
+					<button class="btn btn-default" type="button" data-toggle="collapse" data-target="#colEntradas" aria-expanded="false" aria-controls="collapseExample">
+					  Entradas
+					</button>
+
+					<button class="btn btn-default" type="button" data-toggle="collapse" data-target="#colPratos" aria-expanded="false" aria-controls="collapseExample">
+						Pratos
+					  </button>
+
+					  <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#colBebidas" aria-expanded="false" aria-controls="collapseExample">
+						Bebidas
+					  </button>
+
+					  <button class="btn btn-default" type="button" data-toggle="collapse" data-target="#colSobremesas" aria-expanded="false" aria-controls="collapseExample">
+						Sobremesas
+					  </button>
+					
+				  </p>
+				  <br>
+				  <div class="collapse" id="colEntradas" style="text-align:left; margin-left:45% ">
+					  <p>Entradas:</p>
+					<div class="card card-body">
+						{% for i in entradas %}
+	    			
+						{{i.nome}}
+						<input type="number" min="0" id="{{i.id}}" name="{{i.id}}"  value="0"><br>
+						<br>
+					{% endfor %}
+					</div>
+					<br>
+				  </div>
+
+				  <div class="collapse" id="colPratos" style="text-align:left; margin-left:45% ">
+					<p>Pratos:</p>
+					<div class="card card-body" >
+						{% for i in pratos %}
+	    			
+						{{i.nome}}
+						<input type="number" min="0" id="{{i.id}}" name="{{i.id}}"  value="0"><br>
+						<br>
+					{% endfor %}
+
+					</div>
+					<br>
+				  </div>
+
+				  <div class="collapse" id="colBebidas" style="text-align:left; margin-left:45% ">
+					<p>Bebidas:</p>
+					<div class="card card-body">
+						{% for i in bebidas %}
+	    			
+						{{i.nome}}
+						<input type="number" min="0" id="{{i.id}}" name="{{i.id}}"  value="0"><br>
+						<br>
+					{% endfor %}
+					</div>
+					<br>
+				  </div>
+
+				  <div class="collapse" id="colSobremesas" style="text-align:left; margin-left:45% ">
+					<p>Sobremesas:</p>
+					<div class="card card-body">
+					  {% for i in sobremesas %}
+	    			
+					  {{i.nome}}
+					  <input type="number" min="0" id="{{i.id}}" name="{{i.id}}"  value="0"><br>
+					  <br>
+				  {% endfor %}
+					</div>
+					<br>
+				  </div>
+				  <button type="button" class="btn btn-danger"style=" width: 110px; height: 45px; font-size: 20px" data-toggle="modal" data-target="#cancelarModal">Cancelar</button>
+				  <input type="submit" class="btn btn-success" style=" width: 110px; height: 45px; font-size: 20px" value="Criar" />	
+			</form>
+				
+			</div>
+			</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="cancelarModal" role="dialog">
+	<div class="modal-dialog">
+	
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		<h4 class="modal-title">Cancelar</h4>
+		</div>
+		<div class="modal-body">
+		<p>Pretende Cancelar a reserva de Take Away</p>
+		<p>Irá ser levado para a pagina dos restaurantes sem guardar os dados da reserva de Take Away</p>
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-default"style=" width: 110px; height: 40px; font-size: 20px" data-dismiss="modal">Continuar</button>
+		<a href="{% url 'Restaurantes' %}">
+			<button type="button" class="btn btn-danger" style="width: 110px; height: 40px; font-size: 20px" aria-hidden="true">Cancelar</button>
+		</a>
+		</div>
+	</div>
+	<style>
+		#register .container #register-row {
+			border-radius: 1cm;
+			margin-top: 10px;
+			margin-bottom: 0px;
+			padding-bottom: 30px;
+			padding-top: 30px;
+			height: auto;
+			width: 150vh;
+			width: 95%;
+			border: 1px solid #9C9C9C;
+			background-color: #EAEAEA;
+		}
+	input { 
+            text-align: center;
+            width: 70px 
+			
+        }
+	</style>
+	<br>
+	</body>
+	</html>
+{% endblock %}

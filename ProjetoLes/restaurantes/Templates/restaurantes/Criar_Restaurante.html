@@ -1,0 +1,198 @@
+{% extends 'adminSistema/navbar_com_modal.html' %}
+{% block content %}
+{% load static %}
+<link href="{% static 'css/Forms-Restaurante.css' %}" rel="stylesheet">
+{%block load%}
+{%endblock load%}
+<style>
+    select{
+        width: 100%;
+        height: 35px;
+    }
+</style>
+<center>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form id="modal2" method='post' enctype="multipart/form-data" class="form" role="form" action="">
+                <div class="modal-header">
+                    <button  type="button" class="close" data-toggle="modal" data-target="#myModal3">x</button>
+                      
+                    <h3 class="modal-title" id="myModalLabel">{{Titulo}}</h3>
+                    </div>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {% for erro in form.non_field_errors %}
+                        {% if erro == '1'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> Já existe um restaurante com este nome</p>
+                        {% elif erro == '2'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> Já existe um restaurante com este número de telefone</p>
+                        {% elif erro == '3'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> Já existe um restaurante com esta morada (mesma rua, número e andar)  </p>
+                        {% elif erro == '7'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> O código postal tem que ter 4 números depois '-' e mais 3 números</p>
+                        {% elif erro == '9'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> Código postal não existe </p>
+                        {% elif erro == '4'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> Hora de abertura tem que ser inferior à hora de fecho</p>
+                        {% elif erro == '6'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> A 2º abertura tem que se superior ão 1º fecho</p>
+                        {% elif erro == '8'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> Se possuí um fecho de tarde tem que possuir uma abertura de tarde</p>
+                        {% elif erro == '5'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> Tem que introduzir uma imagem</p>
+                        {% endif %}
+                        {% endfor %}
+                      
+                        {% if form.non_field_errors.0 == '0' %}
+                        <h5> Todos os campos são obrigatórios </h5>
+                        {% endif %}
+                        {% if edit == 1%}
+                        <div class="form-side">
+                            <div class="form-side-left">
+                                <div style="text-align: left;">
+                                    {{form.estado.label_tag}}
+                                </div>
+                                {{form.estado}}   
+                            </div>
+                            <div class="form-side-right">
+                                <div style="text-align: left;">
+                                </div>
+                            </div>
+                           
+                        </div>
+                           
+                        {% endif %}
+                        
+                        
+                        <div class='form-top'>
+                            {{form.nome.label_tag}}
+                            {{form.nome}}
+                        </div>
+                        
+                        <div class='form-top'>
+                            {{form.numerotelefone.label_tag}}
+                            {{form.numerotelefone}}
+                            
+                        </div>
+                        <br>
+                       
+
+   
+                        
+                        <div class='form-top'>
+                            {{form.rua.label_tag}}
+                            {{form.rua}} 
+                        </div>
+                        
+                        <div class="form-side">
+                            <div class="form-side-left">
+                                <div style="text-align: left;">
+                                    {{form.numero_andar.label_tag}}
+                                </div>
+                               
+                                {{form.numero_andar}}
+                                
+                            </div>
+                            <div class="form-side-right">
+                                <div style="text-align: left;">
+                                    {{form.codigo.label_tag}}
+                                </div>
+                                {{form.codigo}} 
+                               
+                            </div> 
+                        </div>
+                        <br>
+                        <div class="form-side">
+                            <div class="form-side-left">
+                                <div style="text-align: left;">
+                                {{form.abertura.label_tag}}
+                                </div>
+                               
+                                {{form.abertura}}
+                                
+                            </div>
+                            <div class="form-side-right">
+                                <div style="text-align: left;">
+                                {{form.fecho.label_tag}}
+                                </div>
+                                {{form.fecho}}
+                            </div>
+                           
+                        </div>
+                    
+
+                   
+                        <div class="form-side">
+                            <div class="form-side-left">
+                                <div style="text-align: left;">
+                                {{form.abertura_tarde.label_tag}}
+                                </div>
+                               
+                                {{form.abertura_tarde}}
+                                
+                            </div>
+                            <div class="form-side-right">
+                                <div style="text-align: left;">
+                                {{form.fecho_tarde.label_tag}}
+                                </div>
+                                {{form.fecho_tarde}}
+                            </div>
+                           
+                        </div>
+                        <br>
+                        <div class='form-top'>
+                            {{form.dia_fecho.label_tag}}
+                            {{form.dia_fecho}} 
+                        </div>
+                       <br><br>
+                       
+                        <center>
+                        {% if imagem %}
+                            <div style="width: 52%">
+                                <label for="image">Imagem atual do restaurante:</label><br>
+                                <img id="image" src="{{imagem.url}}" style="width: 100%" />
+                            </div>
+                            <br>
+                        <label for="image" style="width: 52%">Imagem do restaurante:</label><br>
+                        <input type="file" style="width: 52%" name="imagem" >
+                        <br>
+                            </center>
+                            {%else%}
+                            <br>
+                        <label for="image" style="width: 52%">*Imagem do restaurante:</label><br>
+                        <input type="file" style="width: 52%" name="imagem" >
+                        <br>
+                        {% endif %}
+                        
+                        <br><br>
+                  </div>
+                  <div class="modal-footer">
+                        <button  type="button" class="btn btn-danger" data-toggle="modal"  style="min-width: 80px; height: 40px;" data-target="#myModal3">Cancelar</button>
+                        <input type="submit" class="btn btn-success" style="min-width: 80px; height: 40px;" value="{{Verbo}}" />
+                  </div>
+            </form>
+
+    <div class="modal fade" id="myModal3" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{ModalTitulo}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{ModalFrase}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger"  style="min-width: 80px; height: 40px;" data-dismiss="modal">Não</button>
+                    <a href="{% url 'VerRestaurantes' %}">
+                        <button type="button" class="btn btn-success"  style="min-width: 80px; height: 40px;" aria-hidden="true">Sim</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+
+{% endblock %}

@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Logs</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="{% static 'css/Forms.css' %}" rel="stylesheet">
+
+</head>
+{%block load%}
+{%endblock load%}
+<style>
+    .collapsible {
+      background-color: #777;
+      color: white;
+      cursor: pointer;
+      padding: 18px;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+    }
+    
+    .active, .collapsible:hover {
+      background-color: #555;
+    }
+    
+    .content {
+      padding: 0 18px;
+      display: none;
+      overflow: hidden;
+      background-color: #f1f1f1;
+    }
+    </style>
+<!-- Top Navigation Menu -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>                        
+</button>
+            <a class="navbar-brand" href="index.html"><span class="glyphicon glyphicon-king"></span> Empresa x</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="../restaurantes/"><span class="glyphicon glyphicon-home" ></span>Home</a></li>
+                <li><a href="../restaurantes/VisualizarRestaurantes"><span class="glyphicon glyphicon-map-marker" ></span> Restaurantes</a></li>
+                <li><a href="../funcionarios/VisualizarFuncionarios"><span class="glyphicon glyphicon-folder-close" ></span> Funcionários</a></li>
+                <li><a href="VisualizarEstatísticas"><span class="glyphicon glyphicon-euro" ></span> Estatísticas</a></li>
+             
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            <li><a href="../funcionarios/Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            
+        </ul>
+        </div>
+    </div>
+</nav>
+
+<br><br>
+
+<body style = "background: linear-gradient(to bottom, #0066cc 0%, #99ccff 100%); background-attachment: fixed;">
+    <div class="container">
+       
+        
+        
+        <div class="modal fade" id="myModal3" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Ajuda</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Use os quadrados para selecionar as linhas que pretente eliminar/editar.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="position: 100%; width: 115px; height: 50px; font-size: 20px">Ok!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+    </ul>
+
+    
+    
+    <div class="container">
+      
+        <h2 style="color: white">Visualizar Notificações</h2>
+        <center>
+        <h4 style="color: white"> {{message}} </h4>
+        </center>
+        <button style="float: right; " type="button" class="btn btn-default left" data-toggle="modal" data-target="#myModal3">Ajuda?</button>
+      <br><br>
+
+
+        <div class="container" style="background:white; width: 100%;">
+            
+            
+            <form  method="get" action="">
+                <h3> Pesquisar </h3>
+            <div class="form-inline">
+              <div >
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" value="{{nome}}"><br><br>
+              </div>
+              
+            </div>
+        
+
+                <button  class="btn btn-primary" type = "submit"> Pesquisar </button>
+            
+            <br>
+           <br>
+
+                 
+        <table class="table table-striped">
+
+            <br>
+               
+                 <thead>
+                     <tr>
+                        
+                         <th> <a href="http://127.0.0.1:8000/notificacoes?nome={{nome}}&order_by=nome&direction={{dir}}">
+                             Nome template</a> </th>
+                         <th><a href="http://127.0.0.1:8000/notificacoes?nome={{nome}}&order_by=template&direction={{dir}}">
+                            Template </a></th>
+                         
+                     </form>
+                         <th></th>
+                         <th></th>
+                     </tr>
+                 </thead>
+     
+                 {% for k in page_obj %}
+                    
+                         <tr>
+                             
+     
+                             <td>{{k.nome}}</td> <!-- ERFQWFWEQFWEQFWQFWQFWQFQWFWQFWQFQWFQWFQWFQWFQWQWF-->
+                             
+                             <td> {{k.template}} </td>
+                            
+                             <td> <a href = "EditarNotificacao/{{k.id}}" style = "color: #0000cc">Editar</a></td>
+                             
+                             <td><a data-toggle="modal" data-target="#{{k.id}}"  style = "color: #0000cc">Eliminar</a>
+                                 </td>
+                             <div class="modal fade" id="{{k.id}}" role="dialog">
+                                 <div class="modal-dialog">
+                         
+                                     <!-- Modal content-->
+                                     <div class="modal-content">
+                                         <div class="modal-header">
+                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                             <center>
+                                             <h4 class="modal-title">Elimar notificação: {{k.nome}}</h4>
+                                             </center>
+                                             
+                                         </div>
+                                         <div class="modal-body">
+                                             <p>Pretende eliminar a notificação {{k.nome}} </p>
+                                         </div>
+                                         <div class="modal-footer">
+                                             <button type="button" class="btn btn-default" data-dismiss="modal" style="position: 100%; width: 100px; height: 40px; font-size: 20px">Cancelar</button>
+                                             <a href ="DeleteNotificacao/{{k.id}}">  <button type="button" onclick=""class="btn btn-danger" style="position: 100%; width: 100; height: 40px; font-size: 20px"> Apagar </button> </a>
+                                         
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </tr>
+                     {% endfor %}
+                     
+     
+                 <tbody>
+                     
+                     
+                     
+                 </tbody>
+                 
+             </table>
+            
+          
+    
+        <a href="CriarNotificacao"> <button type="button" class="btn btn-primary" data-dismiss="modal" style="position: 100%; width: 100px; height: 40px; font-size: 20px">Criar</button> </a>
+       
+        <center>
+        <div class="pagination" style="text-align: center;">
+            <span class="step-links" >
+                {% if page_obj.has_previous %}
+                
+                    <a href="?page=1">
+                        <button type="button"  class="btn btn-default" style="position: 100%; width: 100px; height: 35px; font-size: 20px; line-height: 0px;">
+
+                        &laquo; first
+                        </button>
+                    </a> 
+                    
+                    &nbsp;&nbsp;
+                    <a href="?page={{ page_obj.previous_page_number }}">
+                        <button type="button"  class="btn btn-default" style="position: 100%; width: 100px; height: 35px; font-size: 20px; line-height: 0px;">
+                        previous
+                    </button>
+                    </a> 
+                        &nbsp;&nbsp;
+                {% endif %}
+        
+                <span class="current" style ="position: 100%; width: 100px; height: 35px; font-size: 20px; line-height: 0px;">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. &nbsp;&nbsp;
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">
+                        <button type="button"  class="btn btn-default" style="position: 100%; width: 100px; height: 35px; font-size: 20px; line-height: 0px;">
+                            next
+                        </button>
+                    </a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">
+                    <button type="button"  class="btn btn-default" style="position: 100%; width: 100px; height: 35px; font-size: 20px; line-height: 0px;">
+                        last &raquo;
+                    </button> 
+                </a>
+                {% endif %}
+            </span>
+        </div>
+
+    </div>
+       <div class="container">
+        
+    </div>
+
+    <br><br><br><br><br><br>
+   
+
+
+
+
+
+
+
+
+</body>
+<script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+    </script>
+<script>
+    function myFunction() {
+        var x = document.getElementById("myLinks");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+</script>

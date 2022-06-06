@@ -1,0 +1,170 @@
+{% extends 'restaurantes/navbar_com_modal.html' %}
+{% block content %}
+{% load static %}
+<link href="{% static 'css/Forms-Restaurante.css' %}" rel="stylesheet">
+{%block load%}
+{%endblock load%}
+<style>
+    label{
+        width: 52%;
+        font-size: 18px;
+        text-align: left;
+    }
+</style>
+<center>
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form id="modal2" method='post' enctype="multipart/form-data" class="form" role="form" action="">
+                <div class="modal-header">
+                    <button  type="button" class="close" data-toggle="modal" data-target="#myModal3">x</button>
+                      
+                    <h3 class="modal-title" id="myModalLabel">{{Titulo}}</h3>
+                    </div>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {% for erro in form.non_field_errors %}
+                        {% if erro == '1'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> Já existe um restaurante com este nome</p>
+                        {% elif erro == '3'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> Já existe um restaurante com este número de telefone</p>
+                        {% elif erro == '2'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> Já existe um restaurante com esta morada (mesma rua, número e andar)  </p>
+                        {% elif erro == '4'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> Hora de abertura tem que ser inferior à hora de fecho</p>
+                        {% elif erro == '5'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> Tem que introduzir uma imagem</p>
+                        {% elif erro == '6'%}
+                        <p style="font-size: 15px; color:red; width: 52%; text-align: left;"> A 2º abertura tem que se superior ão 1º fecho</p>
+                        {% endif %}
+                        {% endfor %}
+                      
+                        {% if form.non_field_errors.0 == '0' %}
+                        <h5> Todos os campos são obrigatórios </h5>
+                        {% endif %}
+
+                        <div class='form-top'>
+                            {{form.nome.label_tag}}
+                            {{form.nome}}
+                            
+                            {{form.numerotelefone.label_tag}}
+                            {{form.numerotelefone}}
+                            <br><br>
+                        </div>
+
+                        <span class="form-side">
+                            <div class="inline-block">
+                                {{form.cidade.label_tag}}
+                                {{form.cidade}}
+                            </div>
+                            &nbsp;	&nbsp;	&nbsp;&nbsp;	&nbsp;&nbsp;	&nbsp;&nbsp;
+                            <div class="inline-block">
+                                {{form.distrito.label_tag}}
+                                {{form.distrito}}
+                            </div>
+                        </span><br>
+<br>
+                        <div class='form-top'>
+                            {{form.rua.label_tag}}
+                            {{form.rua}} 
+                        </div>
+                        
+                        <span class="form-side3">
+                            <div class="inline-block">
+                                {{form.numero_andar.label_tag}}
+                                {{form.numero_andar}}
+                            </div>
+                            &nbsp;&nbsp;&nbsp;
+                            <div class="inline-block">
+                                {{form.codigo.label_tag}}
+                                {{form.codigo}} 
+                                 -
+                                {{form.postal}}
+                           
+                            </div>
+                        </span><br><br><br>
+
+                        <span class="form-side2">
+                            <div style="float:left;margin-left: 24%">
+                                {{form.abertura.label_tag}}
+                                {{form.abertura}}
+                            </div>
+                            
+                            <div style="float:left; margin-right:20px; margin-left: 20%">
+                                {{form.fecho.label_tag}}
+                                {{form.fecho}}
+                            <br>  
+                            </div>
+                        </span>
+                        <br><br><br><br><br>
+                        
+                        <span class="form-side2">
+                            <div style="float:left;margin-left: 24%">
+                                {{form.abertura.label_tag}}
+                                {{form.abertura_tarde}}
+                            </div>
+                            
+                            <div style="float:left; margin-right:20px; margin-left: 20%">
+                                {{form.fecho.label_tag}}
+                                {{form.fecho_tarde}}
+                            <br>  
+                            </div>
+                        </span>
+                        
+                        <br><br><br><br><br>
+                        {% if ch == 1 %}
+                        <span style="width: 52%">
+                            <label for="chec"> Não possuir 2º horário </label><br>
+                            <input type="checkbox" name="chec" id="chec" style="width: 100px;" >
+                        </span>
+                        <br><br>
+                        {% endif %}
+                        <center>
+                        {% if imagem %}
+                        <label for="image">Imagem atual do restaurante:</label><br>
+                        <img id="image" src="{{imagem.url}}" style="width: 52%" />
+                        </center>
+                        {% endif %}
+                        <br>
+                        <input type="file" name="imagem" >
+                        <br>
+                        <br><br>
+
+                      
+                                
+                              
+                                
+                           
+                          
+                        
+ 
+                  </div>
+                  <div class="modal-footer">
+                        <button  type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal3">Cancelar</button>
+                        <input type="submit" class="btn btn-success" style="width: 80px" value="{{Verbo}}" />
+                  </div>
+            </form>
+
+    <div class="modal fade" id="myModal3" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{ModalTitulo}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{ModalFrase}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="width: 80px;">Não</button>
+                    <a href="{% url 'VisualizarRestaurantes' %}">
+                        <button type="button" class="btn btn-success" style="width: 80px;" aria-hidden="true">Sim</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+
+{% endblock %}

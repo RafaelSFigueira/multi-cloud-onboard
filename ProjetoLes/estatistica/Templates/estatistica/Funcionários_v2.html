@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Logs</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="{% static 'css/Forms.css' %}" rel="stylesheet">
+
+</head>
+{%block load%}
+{%endblock load%}
+
+<!-- Top Navigation Menu -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>                        
+</button>
+            <a class="navbar-brand" href="../restaurantes"><span class="glyphicon glyphicon-king"></span> Empresa x</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="../restaurantes"><span class="glyphicon glyphicon-home" ></span>Home</a></li>
+                <li><a href="../restaurantes/VisualizarRestaurantes"><span class="glyphicon glyphicon-map-marker" ></span> Restaurantes</a></li>
+                <li><a href="VisualizarFuncionarios"><span class="glyphicon glyphicon-folder-close" ></span> Funcionários</a></li>
+                <li><a href="Estatisticas"><span class="glyphicon glyphicon-euro" ></span> Estatísticas</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            <li><a href="Logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            
+        </ul>
+        </div>
+    </div>
+</nav>
+<br><br>
+
+<body style = "background: linear-gradient(to bottom, #0066cc 0%, #99ccff 100%); background-attachment: fixed;">
+    <center>
+        <h2 style="color: white"> Restaurante {{res}} </h2>
+    </center>
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li><a href="../restaurantes/Restaurante_info?id={{rest_id}}" style="color: white">Salas</a></li>
+            <li class="dropdown">
+            </li>
+            <li class="active"><a href="VisualizarFuncionarios?id={{rest_id}}" style="color: black">Funcionários</a></li>
+            <li><a href="contratos_template.html" style="color: white">Estatísticas</a></li>
+        </ul>
+    
+       
+        <div class="modal fade" id="myModal3" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Ajuda</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Use os quadrados para selecionar as linhas que pretente eliminar/editar.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" style="position: 100%; width: 115px; height: 50px; font-size: 20px">Ok!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        
+       
+        <h3 style="color: white">Visualizar funcionários do restaurante{{sala}}</h3>
+        <center>
+        <h4 style="color: white"> {{message}} </h4>
+        </center>
+        <button style="float: right; " type="button" class="btn btn-default left" data-toggle="modal" data-target="#myModal3">Ajuda?</button>
+        <div class="btn-group">
+                
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          Ordenar por <span class="caret"></span></button>
+          
+         
+          
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="?order_by=id&direction=up&id={{rest_id}}">ID<span class="glyphicon glyphicon-arrow-up"></span> </a></li>
+                <li><a href="?order_by=tipofuncionarioid&direction=up&id={{rest_id}}">Tipo de Funcionário<span class="glyphicon glyphicon-arrow-up"></span> </a></li>
+                <li><a href="?order_by=restauranteid&direction=up&id={{rest_id}}">Nome Restaurante<span class="glyphicon glyphicon-arrow-up"></span> </a></li>
+                <li><a href="?order_by=nome&direction=up&id={{rest_id}}">Nome Funcionário <span class="glyphicon glyphicon-arrow-up"></span> </a></li>
+                <li><a href="?order_by=telefone&direction=up&id={{rest_id}}">Número de Telefone<span class="glyphicon glyphicon-arrow-up"></span> </a></li>
+                <li><a href="?order_by=email&direction=up&id={{rest_id}}">Email <span class="glyphicon glyphicon-arrow-up"></span> </a></li>
+         
+
+                <li><a href="?order_by=id&direction=down&id={{rest_id}}">ID<span class="glyphicon glyphicon-arrow-down"></span> </a></li>
+                <li><a href="?order_by=tipofuncionarioid&direction=down&id={{rest_id}}">Tipo de Funcionário<span class="glyphicon glyphicon-arrow-down"></span> </a></li>
+                <li><a href="?order_by=restauranteid&direction=down&id={{rest_id}}">Nome Restaurante<span class="glyphicon glyphicon-arrow-down"></span> </a></li>
+                <li><a href="?order_by=nome&direction=down&id={{rest_id}}">Nome Funcionário <span class="glyphicon glyphicon-arrow-down"></span> </a></li>
+                <li><a href="?order_by=telefone&direction=down&id={{rest_id}}">Número de Telefone<span class="glyphicon glyphicon-arrow-down"></span> </a></li>
+                <li><a href="?order_by=email&direction=down&id={{rest_id}}">Email <span class="glyphicon glyphicon-arrow-down"></span> </a></li>
+            </ul>
+        </div>
+
+
+        <div class="container" style="background:white; width: 100%">
+        <table class="table table-striped">
+           
+            <thead>
+                <tr>
+
+                    <th> Tipo de Funcionário </th>
+                    <th> Restaurante </th>
+                    <th>Nome do Funcionário</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th></th>
+                    <th></th>
+                    
+                </tr>
+            </thead>
+
+            {% for k in page_obj %}
+               
+                    <tr>
+                        
+
+                        
+                        <td>{{k.tipofuncionarioid}}</td>
+                        <td> {{k.restauranteid}} </td>
+                        <td>{{k.nome}}</td> <!-- ERFQWFWEQFWEQFWQFWQFWQFQWFWQFWQFQWFQWFQWFQWFQWQWF-->
+                        <td> {{k.telefone}} </td>
+                        <td> {{k.email}} </td>
+                        <td> <a href = "FuncionarioEditar/{{k.id}}" style = "color: #0000cc">Editar</a></td>
+                        
+                        <td><a data-toggle="modal" data-target="#{{k.id}}"  style = "color: #0000cc">Eliminar</a>
+                            </td>
+                        <div class="modal fade" id="{{k.id}}" role="dialog">
+                            <div class="modal-dialog">
+                    
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <center>
+                                        <h4 class="modal-title">Elimar funcionario: {{k.nome}}</h4>
+                                        </center>
+                                        
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Pretende eliminar o funcionario {{k.nome}}?</p>
+                                       
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" style="position: 100%; width: 100px; height: 40px; font-size: 20px">Cancelar</button>
+                                        <a href ="Delete_Func?id={{k.id}}">  <button type="button" onclick=""class="btn btn-danger" style="position: 100%; width: 100; height: 40px; font-size: 20px"> Apagar </button> </a>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                {% endfor %}
+                
+
+            <tbody>
+                
+                
+                
+            </tbody>
+            
+        </table>
+    
+        <a href="CriarFuncionario"> <button type="button" class="btn btn-primary" data-dismiss="modal" style="position: 100%; width: 100px; height: 40px; font-size: 20px">Criar</button> </a>
+       
+        <center>
+        <div class="pagination" style="text-align: center;">
+            <span class="step-links" >
+                {% if page_obj.has_previous %}
+                
+                    <a href="?page=1">
+                        <button type="button"  class="btn btn-default" style="position: 100%; width: 100px; height: 35px; font-size: 20px; line-height: 0px;">
+
+                        &laquo; first
+                        </button>
+                    </a> 
+                    
+                    &nbsp;&nbsp;
+                    <a href="?page={{ page_obj.previous_page_number }}">
+                        <button type="button"  class="btn btn-default" style="position: 100%; width: 100px; height: 35px; font-size: 20px; line-height: 0px;">
+                        previous
+                    </button>
+                    </a> 
+                        &nbsp;&nbsp;
+                {% endif %}
+        
+                <span class="current" style ="position: 100%; width: 100px; height: 35px; font-size: 20px; line-height: 0px;">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}. &nbsp;&nbsp;
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">
+                        <button type="button"  class="btn btn-default" style="position: 100%; width: 100px; height: 35px; font-size: 20px; line-height: 0px;">
+                            next
+                        </button>
+                    </a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">
+                    <button type="button"  class="btn btn-default" style="position: 100%; width: 100px; height: 35px; font-size: 20px; line-height: 0px;">
+                        last &raquo;
+                    </button> 
+                </a>
+                {% endif %}
+            </span>
+        </div>
+
+    </div>
+       <div class="container">
+        
+    </div>
+
+    <br><br><br><br><br><br>
+   
+
+
+
+
+
+
+
+
+</body>
+<script>
+    function myFunction() {
+        var x = document.getElementById("myLinks");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+</script>

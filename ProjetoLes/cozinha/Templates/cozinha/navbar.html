@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Página inicial</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+<style>
+      
+      .icon-button__badge {
+        position: absolute;
+        right: 0px;
+        top: 7px;
+        width: 15px;
+        height: 15px;
+        background: red;
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+      }
+      
+</style>
+{%block load%}
+{%endblock load%}
+
+<!-- Top Navigation Menu -->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>                        
+</button>
+            <a class="navbar-brand" href="{% url 'homeCozinha' %}"><span class="glyphicon glyphicon-king"></span> Empresa x</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="{% url 'homeCozinha' %}"><span class="glyphicon glyphicon-home" ></span> Home</a></li>
+                <li><a href="parque_template.html"><span class="glyphicon glyphicon-map-marker" ></span> Mapa</a></li>
+                
+                <li><a href="index.html"><span class="glyphicon glyphicon-info-sign" ></span> Ajuda</a></li>
+                <li><a href="{% url 'Logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<body style = "background: linear-gradient(to bottom, #0066cc 0%, #99ccff 100%); background-attachment: fixed;">
+    {% block content %}
+    {% endblock %}

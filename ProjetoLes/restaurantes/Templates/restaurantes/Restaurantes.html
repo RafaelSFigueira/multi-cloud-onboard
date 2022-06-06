@@ -1,0 +1,154 @@
+{% extends 'restaurantes/navbar.html' %}
+{% block content %}
+    <div class="container">
+       
+        <div class="modal fade" id="myModal3" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <center>
+                        <h4 class="modal-title">Ajuda</h4>
+                        </center>
+                    </div>
+                    <div class="modal-body">
+                        <p> <STRONG>Nesta página pode visualizar todos os restaurantes existentes </Strong> </p>
+                        <p>Se pretender um restaurante em específico use a pesquisa(Ex: Nome: sa  irá encontrar todos os restaurantes que tenham sa no nome</p>
+                        <p>Ao carregar em "Nome Restaurante" irá ordenar por ordem alfabética crescente pelos nomes dos restaurantes, se carregar na seta ao lado irá ordenar por ordem decrescente</p>
+                        <p>Para ver informações de apenas 1 restaurante carregue em cima do nome do restaurante</p>
+                        <p>Se pretender editar/eliminar um restaurante carregue nos respetivos ícones que se encontrão no lado direito da tabela</p>
+                        <p>Para criar um novo restaurante carregue no botão que diz "Criar"</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"  style="min-width: 80px; height: 40px;" data-dismiss="modal" >Ok!</button>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    </ul>
+
+    <div class="container">
+      
+        <h2 style="color: white">Visualizar Restaurantes</h2>
+        <center>
+        <h4 style="color: white"> {{message}} </h4>
+        </center>
+        <button style="float: right;" type="button" class="btn btn-default left" data-toggle="modal"  style="min-width: 80px; height: 40px;" data-target="#myModal3">Ajuda?</button>
+      <br><br>
+
+
+        <div class="container" style="background:white; width: 100%;">
+            
+            
+            <form  method="get" action="VisualizarRestaurantes">
+                <h3> Pesquisar </h3>
+            <div class="form-inline">
+              <div >
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" value="{{nome}}">
+              </div>
+              
+              <div>
+                <label for="cidade">Cidade:</label>
+                <input type="text" id="lname" name="cidade" value="{{cidade}}"> 
+                <button  class="btn btn-primary"  style="min-width: 80px; height: 40px;" type = "submit" > Pesquisar </button>
+                
+            </div>
+        </div>
+   
+
+            
+           
+        <table class="table table-striped">
+
+       <br>
+          
+            <thead>
+                <tr>
+                   
+                    <th>
+                        
+                        <a style="color: #0000cc;" href="?nome={{nome}}&numerotelefone={{numerotelefone}}&cidade={{cidade}}&order_by=nome&direction=0">
+                        Nome Restaurante 
+                        </a>
+                        <a href="?nome={{nome}}&numerotelefone={{numerotelefone}}&cidade={{cidade}}&order_by=nome&direction=1">
+                        <span style="color: #0000cc;" class="glyphicon glyphicon-chevron-down"> </span> </a>
+                    </th>
+                    <th>
+                        <a style="color: #0000cc;"  href="?nome={{nome}}&numerotelefone={{numerotelefone}}&cidade={{cidade}}&order_by=cidade&direction=0">
+                            Cidade
+                         </a>
+                        <a style="color: #0000cc;"  href="?nome={{nome}}&numerotelefone={{numerotelefone}}&cidade={{cidade}}&order_by=cidade&direction=1">
+                        <span class="glyphicon glyphicon-chevron-down"> </span> </a>
+                    </th>
+                   
+                </form>
+                <th>Número</th>
+                    <th>Abertura</th>
+                    <th>Fecho</th>
+                    <th>Abertura</th>
+                    <th>Fecho</th>
+                    
+                    
+                    <th>Dia de fecho</th>
+            
+                    <th>Estado</th>
+                    <th></th>
+                    <th></th>
+                    
+                </tr>
+            </thead>
+
+            {% for k in page_obj %}
+               
+                    <tr>
+                        
+
+                        <td><a href = "{% url 'Restaurante_info' k.id %}" style = "color: #0000cc">{{k.nome}}</a></td> <!-- ERFQWFWEQFWEQFWQFWQFWQFQWFWQFWQFQWFQWFQWFQWFQWQWF-->
+                        <td> {{k.cidade}}, {{k.distrito}} </td>
+                        <td>{{k.numerotelefone}} </td>
+
+                        <td>{{k.abertura|time:"H:i"}}</td>
+                        <td>{{k.fecho|time:"H:i"}}</td>
+                        <td>{{k.abertura_tarde|time:"H:i"}}</td>
+                        <td>{{k.fecho_tarde|time:"H:i"}}</td>
+                        
+                        <td> {{k.dia_fecho}} </td>
+                        <td> {{k.estado}} </td>
+                        <td style="text-align: center;"> 
+   
+                            <a href = "{% url 'Restaurante_info' k.id %}" style = "color: #0000cc;" > <span class="glyphicon glyphicon-plus" ></span></a></td>
+                        
+                        <td style="text-align: center;"> 
+   
+                            <a href = "{% url 'EditarRestaurante' k.id %}" style = "color: #0000cc;" > <span class="glyphicon glyphicon-edit" ></span></a></td>
+                        
+                      
+                       
+
+                        
+                    </tr>
+                {% endfor %}
+                
+
+            <tbody>
+                
+                
+                
+            </tbody>
+            
+        </table>
+        <br>
+        
+        <center>
+        {% include 'restaurantes/paginator.html' %}
+        </center>
+        {% endblock %}
+        
+        
+</body>

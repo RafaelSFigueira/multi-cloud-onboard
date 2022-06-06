@@ -1,0 +1,160 @@
+
+        /* Add a gray background color and some padding to the footer */
+        
+        footer {
+            background-color: #f2f2f2;
+            padding: 25px;
+        }
+
+        .mobile-container {
+            max-width: 480px;
+            margin: auto;
+            background-color: #555;
+            height: 500px;
+            color: white;
+            border-radius: 10px;
+        }
+        
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+            position: relative;
+        }
+        
+        .topnav #myLinks {
+            display: none;
+        }
+        
+        .topnav a {
+            color: white;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+            display: block;
+        }
+        
+        .topnav a.icon {
+            background: black;
+            display: block;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        
+        .active {
+            color: white;
+        }
+
+
+      
+   
+        input { 
+            text-align: center; 
+        }
+        .form-top input{
+            width: 52%;
+            height: 35px;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        .form-top select{
+            width: 52%;
+            height: 35px;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        .form-top label{
+            width: 52%;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        .form-side{
+            display: inline-block;
+        }
+
+        .form-side .block {
+            display: block;
+        }
+          
+        .form-side .inline-block {
+            display: inline-block;
+            width: 35%;
+        }
+        .form-side select{
+            width: 85%;
+            height: 35px;
+        }
+        .form-side input[type=number]{
+            width: 40%;
+            height: 35px;
+        }
+
+        .form-side label{
+            width: 85%;
+            font-size: 18px;
+            text-align: left;
+        }
+
+
+        .form-side2 input{
+            display:block;
+            
+        }
+        .form-side2 label{
+            display:block;
+        }
+        .form-side2 label{
+            width: 100%;
+            font-size: 18px;
+            text-align: left;
+        }
+        .form-side2 input{
+            width: 270%;
+            height: 35px;
+        }
+        .test{
+            width: 10%;
+            height: 35px;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        .form-small input{
+            width: 40%;
+            height: 35px;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        .form-small select{
+            width: 40%;
+            height: 35px;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        .form-small label{
+            width: 40%;
+            font-size: 18px;
+            text-align: left;
+        }
+        body{
+            background: linear-gradient(to bottom, #0066cc 0%, #99ccff 100%); 
+            background-attachment: fixed;
+        }
+          

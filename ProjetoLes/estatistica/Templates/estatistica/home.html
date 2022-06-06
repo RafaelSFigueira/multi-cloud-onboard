@@ -1,0 +1,71 @@
+{% extends 'restaurantes/navbar.html' %}
+{% block content %}
+<style>
+    .row {
+        display: table; /* Make the container element behave like a table */
+        width: 100%; /* Set full-width to expand the whole page */
+      }
+      
+      .col-sm-4 {
+        display: table-cell; /* Make elements inside the container behave like table cells */
+      }
+      
+</style>
+
+    <br><br><br>
+
+    <div class="container text-center">
+        <h1 style="color: white">Visualizar Estatísticas</h1>
+        <br><br><br>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="well" style="min-height: 320px" >
+                    <h3>De espaço</h3>
+                    <br>
+                    <p>Número médio de pessoas por grupo, </p>
+                    <p>afluência por zona do restaurante, </p>
+                    <p>Tempo médio que os clientes permanencem no restaurante </p> 
+                    <div style="position: absolute; 
+                    bottom: 50px; left: 45%">
+                    <a button type="button" style="background-color: black; color:white; min-width: 20%;" href={% url 'VisualizarEstatisticas_epaco_1' %} class="btn button5">Ir</button> </a>
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-4 ">
+                <div class="well" style="min-height: 320px" >
+                    <h3>De produtos do menu</h3>
+                    <br>
+                    <p>Popularidade dos produtos ,</p>
+                    <p>item mais rantável, </p>
+                    <p>receita de cada produto </p>
+                    
+                    <div style="position: absolute; 
+                    bottom: 50px; left: 45%">
+                    <a button type="button" style="background-color: black; color:white; min-width: 20%;" href="{% url 'VisualizarFuncionarios' 0 %}" class="btn button5">Ir</button> </a>
+                </div>
+                    
+                </div>
+            </div>
+            <div class="col-sm-4 ">
+                <div class="well" style="min-height: 320px">
+                    <h3>De desempenho dos funcionários</h3><br>
+                    <p> Tempo medio de resposta de serviço (pedido-confecionar prato)
+                    </p>
+                   <p> Tempo medio de resposta de serviço (confecionar prato-fecho do pedido)
+                </p>
+                   
+                 <div style="position: absolute; 
+                    bottom: 50px; left: 45%">
+                    <a button type="button" style="background-color: black; color:white; min-width: 20%;" href="{% url 'VisualizarEstatisticas' %}" class="btn button5">Ir</button> </a>
+                    
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    </div>
+
+</body>
+{% endblock %}
+</html>

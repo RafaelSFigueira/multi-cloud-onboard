@@ -1,0 +1,195 @@
+{% extends 'adminSistema/navbar.html' %}
+{% block content %}
+
+
+    <div class="container">
+        <div class="modal fade" id="myModal3" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <center>
+                        <h4 class="modal-title">Ajuda</h4>
+                        </center>
+                    </div>
+                    <div class="modal-body">
+                        <p> <STRONG>Nesta página pode visualizar todos os funcionários existentes </Strong> </p>
+                            <p>Possuí mecanismos de pesquisa para o tipo de funcionário, nome do restaurante e nome do funcionário em que os mesmos irão filtrar consuante o que introduzir </p>
+                            <p>Ao carregar em "Tipo de funcionário" irá ordenar por ordem alfabética crescente pelos nomes dos tipos de funcionários, se carregar na seta ao lado irá ordenar por ordem decrescente,
+                                o mesmo de aplica ao "Nome do restaurante" e ao "Nome do funcionário"
+                            </p>
+                            
+                            <p>Se pretender editar/eliminar um funcionário carregue nos respetivos ícones que se encontrão do lado direito da tabela</p>
+                            <p>Para criar um novo funcioário carregue no botão que diz "Criar"</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"  style="min-width: 80px; height: 40px;" data-dismiss="modal" >Ok!</button>
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    </ul>
+    <div class="container">
+        <h2 style="color: white">Visualizar Funcionários</h2>
+        <center>
+        <h4 style="color: white"> {{message}} </h4>
+        </center>
+        <button style="float: right;" type="button" class="btn btn-default left" data-toggle="modal"  style="min-width: 80px; height: 40px;" data-target="#myModal3">Ajuda?</button>
+      <br><br>
+
+      
+      <div class="container" style="background:white; width: 100%;">
+            <form  method="get" action="">
+                <h3> Pesquisar </h3>
+                <div class="form-inline">
+                    <label for="Tipo">Tipo funcionário:</label>
+                    <select name="Tipo" id="Tipo">
+                        <option value="0">Todos</option>
+                        {% if Tipo == "1" %}
+                        <option selected="true" value="1">Administrador</option>
+                        {% else %}
+                        <option value="1">Administrador</option>
+                        {% endif %}
+
+                        {% if Tipo == "2" %}
+                        <option selected="true" value="2">Anfitrião</option>
+                        {% else %}
+                        <option value="2">Anfitrião</option>
+                        {% endif %}
+
+                        {% if Tipo == "3" %}
+                        <option selected="true" value="3">Cozinherio</option>
+                        {% else %}
+                        <option value="3">Cozinherio</option>
+                        {% endif %}
+
+                        {% if Tipo == "4" %}
+                        <option selected="true" value="4">Garçon</option>
+                        {% else %}
+                        <option value="4">Garçon</option>
+                        {% endif %}
+
+                        {% if Tipo == "5" %}
+                        <option selected="true" value="5">Limpeza</option>
+                        {% else %}
+                        <option value="5">Limpeza</option>
+                        {% endif %}
+
+                        {% if Tipo == "7" %}
+                        <option selected="true" value="7">Administrador de Sistema</option>
+                        {% else %}
+                        <option value="7">Administrador de Sistema</option>
+                        {% endif %}
+                    </select>
+
+                    <div>
+                        <label for="cidade">Restaurante:</label>
+                        <input type="text" id="res" name="res" value="{{res}}">     
+                    </div>
+                    <div >
+                            <label for="nome">Nome:</label>
+                            <input type="text" id="nome" name="nome" value="{{nome}}">
+                            <button  class="btn btn-primary" type = "submit" style="min-width: 80px; height: 40px;"> Pesquisar </button>
+                    </div>
+              
+              
+                </div>
+                <br>
+                <table class="table table-striped">
+           
+                <thead>
+                    <tr>
+                        <th>
+                            <a style="color: #0000cc;" href="?Tipo={{Tipo}}&nome={{nome}}&res={{res}}&order_by=tipofuncionarioid&direction=0">
+                                Tipo de funcionário
+                                </a>
+                                <a href="?Tipo={{Tipo}}&res={{res}}&nome={{nome}}&order_by=tipofuncionarioid&direction=1">
+                                <span style="color: #0000cc;" class="glyphicon glyphicon-chevron-down"> </span> </a>
+                            </th>
+                            <th> <a style="color: #0000cc;" href="?Tipo={{Tipo}}&nome={{nome}}&res={{res}}&order_by=restauranteid&direction=0">
+                                Nome do restaurante 
+                                </a>
+                                <a href="?Tipo={{Tipo}}&nome={{nome}}&res={{res}}&order_by=restauranteid&direction=1">
+                                <span style="color: #0000cc;" class="glyphicon glyphicon-chevron-down"> </span> </a> 
+                            </th>
+                            <th><a style="color: #0000cc;" href="?Tipo={{Tipo}}&nome={{nome}}&res={{res}}&order_by=nome&direction=0">
+                                Nome do funcionário 
+                                </a>
+                                <a href="?Tipo={{Tipo}}&nome={{nome}}&res={{res}}&order_by=nome&direction=1">
+                                <span style="color: #0000cc;" class="glyphicon glyphicon-chevron-down"> </span> </a></th>
+                            <th>Telefone</th>
+                            <th>Email</th>
+                            <th></th>
+                        <th></th>
+                    
+                    </tr>
+                </thead>
+
+                {% for k in page_obj %}
+                    <tr>
+                        <td>
+                            {{k.tipofuncionarioid.nome}}
+                        </td>
+                        {% if k.restauranteid is None %}
+
+                        <td> </td>
+
+                        {% else %}
+
+                        <td> {{k.restauranteid}} </td>
+
+                        {% endif %}
+                        <td>{{k.nome}}</td> 
+                        <td> {{k.telefone}} </td>
+                        <td> {{k.email}} </td>
+                        <td> <a href ="{% url 'EditarFuncionario' k.id %}" style = "color: #0000cc"><span class="glyphicon glyphicon-edit" ></span></a></td>
+                        
+                        <td><a data-toggle="modal" data-target="#{{k.id}}"  style = "color: #0000cc"><span class="glyphicon glyphicon-remove" ></span></a>
+                            </td>
+                        <div class="modal fade" id="{{k.id}}" role="dialog">
+                            <div class="modal-dialog">
+                    
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <center>
+                                        <h4 class="modal-title">Elimar funcionario: {{k.nome}}</h4>
+                                        </center>
+                                        
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Pretende eliminar o funcionario {{k.nome}}?</p>
+                                       
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" style="min-width: 80px; height: 40px;">Cancelar</button>
+                                        <a href ="{% url 'ApagarFuncionario' k.id %}">  <button type="button" onclick=""class="btn btn-danger" style="min-width: 80px; height: 40px;"> Apagar </button> </a>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </tr>
+                {% endfor %}
+                
+
+            <tbody>
+                
+                
+                
+            </tbody>
+            
+        </table>
+    <br>
+        <a href="{% url 'CreateFuncionario' %}"> <button type="button" class="btn btn-success" data-dismiss="modal" style="min-width: 80px; height: 40px;">Criar</button> </a>
+       
+        <center>
+            {% include 'adminSistema/paginator.html' %}
+        </center>
+{%endblock%}
